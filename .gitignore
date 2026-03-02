@@ -1,2 +1,9 @@
 //Rider files
 .idea/
+*.sln.iml
+
+//Default build folders
+bin/
+obj/
+out/
+artifacts/
