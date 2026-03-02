@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using Telt_Homework.Enums;
 
 namespace Telt_Homework.Schemas.UserConfig;
 
@@ -6,7 +7,7 @@ namespace Telt_Homework.Schemas.UserConfig;
 public class Password { 
 
     [XmlAttribute(AttributeName="type")] 
-    public string Type { get; set; } 
+    public PasswordType Type { get; set; } 
 
     [XmlText] 
     public string Text { get; set; } 
