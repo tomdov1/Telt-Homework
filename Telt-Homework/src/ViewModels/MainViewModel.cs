@@ -4,16 +4,44 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Telt_Homework.Main;
 using Telt_Homework.Schemas.UserConfig;
+using Version = Telt_Homework.Schemas.UserConfig.Version;
 
 namespace Telt_Homework.ViewModels;
 
 public class MainViewModel : INotifyPropertyChanged
 {
-    public ObservableCollection<PersonData> UserData { get; set; } = new();
-
     private string configPath = string.Empty;
+    private Version? version;
+    private Uptime? uptime;
     
     public event PropertyChangedEventHandler? PropertyChanged;
+    
+    public ObservableCollection<PersonData> UserData { get; set; } = new();
+    
+    public Uptime? Uptime
+    {
+        get => uptime;
+        set
+        {
+            if (Equals(value, uptime))
+            {
+                return;
+            }
+            uptime = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public Version? Version
+    {
+        get => version;
+        set
+        {
+            if (Equals(value, version)) return;
+            version = value;
+            OnPropertyChanged();
+        }
+    }
     
     public string ConfigPath
     {
@@ -35,9 +63,13 @@ public class MainViewModel : INotifyPropertyChanged
         {
             return;
         }
+        
+        Config config = ConfigLoader.LoadConfig(ConfigPath);
 
         UserData.Clear();
-        foreach (var entry in ConfigLoader.LoadConfig(ConfigPath).UserData.Accounts)
+        Version = config.Version;
+        Uptime = config.Uptime;
+        foreach (var entry in config.UserData.Accounts)
         {
             UserData.Add(entry);
         }

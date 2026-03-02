@@ -8,7 +8,9 @@
     <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -23,7 +25,16 @@
         <Button Grid.Row="0" Grid.Column="2" Margin="0,0,0,8" Padding="12,4"
                 Content="Load" Click="LoadConfig_Click" />
 
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding UserData}">
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,8" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="Version Type:" Margin="0,0,8,0" />
+            <TextBox Width="120" Margin="0,0,8,0"
+                     Text="{Binding Version.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock VerticalAlignment="Center" Text="Version String:" Margin="0,0,8,0" />
+            <TextBox Width="200"
+                     Text="{Binding Version.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding UserData}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Id}">
@@ -59,5 +70,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,8,0,0">
+            <TextBlock VerticalAlignment="Center" Text="Uptime Type:" Margin="0,0,8,0" />
+            <TextBox Width="120" Margin="0,0,8,0"
+                     Text="{Binding Uptime.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock VerticalAlignment="Center" Text="Uptime String:" Margin="0,0,8,0" />
+            <TextBox Width="200"
+                     Text="{Binding Uptime.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </TextBlock>
     </Grid>
 </Window>
