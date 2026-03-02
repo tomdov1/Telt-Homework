@@ -3,8 +3,8 @@
 namespace Telt_Homework.Schemas.UserConfig;
 
 [XmlRoot(ElementName="person")]
-public class PersonData { 
+public class PersonDataContainer { 
 
     [XmlElement(ElementName="acc")] 
-    public List<UserAccount> Accounts { get; set; } 
+    public List<PersonData> Accounts { get; set; } 
 }

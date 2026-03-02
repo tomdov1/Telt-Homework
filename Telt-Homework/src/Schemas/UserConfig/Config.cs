@@ -9,7 +9,7 @@ public class Config {
     public Version Version { get; set; } 
 
     [XmlElement(ElementName="person")] 
-    public PersonData Person { get; set; } 
+    public PersonDataContainer UserData { get; set; } 
 
     [XmlElement(ElementName="uptime")] 
     public Uptime Uptime { get; set; } 

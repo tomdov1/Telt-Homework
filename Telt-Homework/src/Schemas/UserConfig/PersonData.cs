@@ -3,7 +3,7 @@
 namespace Telt_Homework.Schemas.UserConfig;
 
 [XmlRoot(ElementName="acc")]
-public class UserAccount { 
+public class PersonData { 
 
     [XmlElement(ElementName="user_name")] 
     public string UserName { get; set; } 
