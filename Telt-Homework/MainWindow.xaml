@@ -5,16 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ListBox ItemsSource="{Binding UserData}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding UserName}" Margin="5"/>
-                        <TextBlock Text="{Binding Id}" Margin="5"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBox Grid.Row="0" Grid.Column="0" Margin="0,0,8,8"
+                 Text="{Binding ConfigPath, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Grid.Row="0" Grid.Column="1" Margin="0,0,8,8" Padding="12,4"
+                Content="Browse..." Click="BrowseConfig_Click" />
+        <Button Grid.Row="0" Grid.Column="2" Margin="0,0,0,8" Padding="12,4"
+                Content="Load" Click="LoadConfig_Click" />
+
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding UserData}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="User Id" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding UserName}" />
+                    <GridViewColumn Header="Enabled">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Enabled, Mode=TwoWay}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password.Type}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

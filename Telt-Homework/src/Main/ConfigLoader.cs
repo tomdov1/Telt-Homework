@@ -6,26 +6,32 @@ namespace Telt_Homework.Main;
 
 public class ConfigLoader
 {
-    private const string FILENAME = "./config.xml";
-    
+    private const string DefaultFilename = "config.xml";
+
     public static Config LoadConfig()
     {
-        Config config = new Config();
+        string configFile = Path.Combine(Environment.CurrentDirectory, DefaultFilename);
+        return LoadConfig(configFile);
+    }
+
+    public static Config LoadConfig(string configFile)
+    {
+        if (string.IsNullOrWhiteSpace(configFile))
+        {
+            throw new ArgumentException("Config file path is required.", nameof(configFile));
+        }
+
         try
         {
-            //config file is in root solution folder 
-            string configFile = Path.Combine(Environment.CurrentDirectory, FILENAME);
             string xml = File.ReadAllText(configFile);
             XmlSerializer serializer = new XmlSerializer(typeof(Config));
             using StringReader reader = new StringReader(xml);
-            config = (Config)serializer.Deserialize(reader)!;
+            return (Config)serializer.Deserialize(reader)!;
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
-
-        return config;
     }
 }

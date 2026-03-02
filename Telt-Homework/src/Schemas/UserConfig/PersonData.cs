@@ -16,7 +16,4 @@ public class PersonData {
 
     [XmlAttribute(AttributeName="enabled")] 
     public int Enabled { get; set; } 
-
-    [XmlText] 
-    public string Text { get; set; } 
 }
