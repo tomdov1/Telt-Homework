@@ -26,16 +26,36 @@
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding UserData}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="User Id" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding UserName}" />
-                    <GridViewColumn Header="Enabled">
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="User Id" Tag="Id" Click="GridViewColumnHeader_Click" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding UserName}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="User Name" Tag="UserName" Click="GridViewColumnHeader_Click" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Enabled" Tag="Enabled" Click="GridViewColumnHeader_Click" />
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding Enabled, Mode=TwoWay}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password.Type}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Password.Type}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Password Type" Tag="Password.Type" Click="GridViewColumnHeader_Click" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Password.Text}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Password Value" Tag="Password.Text" Click="GridViewColumnHeader_Click" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
