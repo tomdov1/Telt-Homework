@@ -42,6 +42,14 @@ public partial class MainWindow : Window
         }
     }
 
+    private void SaveConfig_Click(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is MainViewModel vm)
+        {
+            vm.SaveConfig();
+        }
+    }
+
     private void GridViewColumnHeader_Click(object sender, RoutedEventArgs e)
     {
         if (sender is not GridViewColumnHeader header)

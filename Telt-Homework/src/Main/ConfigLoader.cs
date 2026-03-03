@@ -34,4 +34,25 @@ public class ConfigLoader
             throw;
         }
     }
+    public static void SaveConfig(Config config, string configFile)
+    {
+        ArgumentNullException.ThrowIfNull(config);
+
+        if (string.IsNullOrWhiteSpace(configFile))
+        {
+            throw new ArgumentException("Config file path is required.", nameof(configFile));
+        }
+
+        try
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Config));
+            using StreamWriter writer = new StreamWriter(configFile);
+            serializer.Serialize(writer, config);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 }

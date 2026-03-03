@@ -16,16 +16,19 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <TextBox Grid.Row="0" Grid.Column="0" Margin="0,0,8,8"
                  Text="{Binding ConfigPath, UpdateSourceTrigger=PropertyChanged}" />
         <Button Grid.Row="0" Grid.Column="1" Margin="0,0,8,8" Padding="12,4"
                 Content="Browse..." Click="BrowseConfig_Click" />
-        <Button Grid.Row="0" Grid.Column="2" Margin="0,0,0,8" Padding="12,4"
+        <Button Grid.Row="0" Grid.Column="2" Margin="0,0,8,8" Padding="12,4"
                 Content="Load" Click="LoadConfig_Click" />
+        <Button Grid.Row="0" Grid.Column="3" Margin="0,0,0,8" Padding="12,4"
+                Content="Save" Click="SaveConfig_Click" IsEnabled="{Binding IsDirty}" />
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,8" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,8" Orientation="Horizontal">
             <TextBlock VerticalAlignment="Center" Text="Version Type:" Margin="0,0,8,0" />
             <TextBox Width="120" Margin="0,0,8,0"
                      Text="{Binding Version.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -34,18 +37,28 @@
                      Text="{Binding Version.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
-        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding UserData}">
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding UserData}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                    <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="User Id" Tag="Id" Click="GridViewColumnHeader_Click" />
                         </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding UserName}">
+                    <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="User Name" Tag="UserName" Click="GridViewColumnHeader_Click" />
                         </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
@@ -57,21 +70,31 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Password.Type}">
+                    <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="Password Type" Tag="Password.Type" Click="GridViewColumnHeader_Click" />
                         </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Password.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Password.Text}">
+                    <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="Password Value" Tag="Password.Text" Click="GridViewColumnHeader_Click" />
                         </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Password.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,8,0,0">
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,8,0,0">
             <TextBlock VerticalAlignment="Center" Text="Uptime Type:" Margin="0,0,8,0" />
             <TextBox Width="120" Margin="0,0,8,0"
                      Text="{Binding Uptime.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
