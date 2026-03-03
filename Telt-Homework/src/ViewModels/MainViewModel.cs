@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Telt_Homework.Enums;
 using Telt_Homework.Main;
 using Telt_Homework.Schemas.UserConfig;
 using Version = Telt_Homework.Schemas.UserConfig.Version;
@@ -19,6 +20,7 @@ public class MainViewModel : INotifyPropertyChanged
 
 
     public ObservableCollection<PersonData> UserData { get; set; }
+    public IEnumerable<PasswordType> PasswordTypes => Enum.GetValues<PasswordType>();
 
     public MainViewModel()
     {
@@ -130,11 +132,11 @@ public class MainViewModel : INotifyPropertyChanged
             return;
         }
 
-        Config config = new Config
+        Config config = new()
         {
             Version = this.Version,
             Uptime = this.Uptime,
-            UserData = new PersonDataContainer { Accounts = UserData.ToList() }
+            UserData = new() { Accounts = UserData.ToList() }
         };
 
         ConfigLoader.SaveConfig(config, ConfigPath);

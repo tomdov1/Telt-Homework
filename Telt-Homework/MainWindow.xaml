@@ -76,7 +76,8 @@
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Password.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                                <ComboBox ItemsSource="{Binding DataContext.PasswordTypes, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          SelectedItem="{Binding Password.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
