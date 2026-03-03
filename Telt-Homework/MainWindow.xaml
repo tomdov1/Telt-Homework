@@ -40,6 +40,16 @@
         <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding UserData}">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Width="40">
+                        <GridViewColumn.Header>
+                            <CheckBox IsChecked="{Binding DataContext.IsAllSelected, RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="Select/Deselect All" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="User Id" Tag="Id" Click="GridViewColumnHeader_Click" />

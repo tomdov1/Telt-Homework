@@ -15,6 +15,8 @@ public class MainViewModel : INotifyPropertyChanged
     private Version? version;
     private Uptime? uptime;
     private bool isDirty;
+    private bool isAllSelected;
+    private bool isUpdatingSelection;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -39,6 +41,30 @@ public class MainViewModel : INotifyPropertyChanged
             }
             isDirty = value;
             OnPropertyChanged();
+        }
+    }
+
+    public bool IsAllSelected
+    {
+        get => isAllSelected;
+        set
+        {
+            if (isAllSelected == value)
+            {
+                return;
+            }
+            isAllSelected = value;
+            OnPropertyChanged();
+
+            if (!isUpdatingSelection)
+            {
+                isUpdatingSelection = true;
+                foreach (var item in UserData)
+                {
+                    item.IsSelected = value;
+                }
+                isUpdatingSelection = false;
+            }
         }
     }
 
@@ -145,7 +171,26 @@ public class MainViewModel : INotifyPropertyChanged
 
     private void OnChildPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        IsDirty = true;
+        if (e.PropertyName == nameof(PersonData.IsSelected))
+        {
+            UpdateIsAllSelected();
+        }
+        else
+        {
+            IsDirty = true;
+        }
+    }
+
+    private void UpdateIsAllSelected()
+    {
+        if (isUpdatingSelection || UserData == null || !UserData.Any())
+        {
+            return;
+        }
+
+        isUpdatingSelection = true;
+        IsAllSelected = UserData.All(x => x.IsSelected);
+        isUpdatingSelection = false;
     }
 
     private void OnUserDataChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -166,6 +211,7 @@ public class MainViewModel : INotifyPropertyChanged
             }
         }
 
+        UpdateIsAllSelected();
         IsDirty = true;
     }
 

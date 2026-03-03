@@ -9,6 +9,14 @@ public class PersonData : ObservableObject
     private Password password = new();
     private int id;
     private int enabled;
+    private bool isSelected;
+
+    [XmlIgnore]
+    public bool IsSelected
+    {
+        get => isSelected;
+        set => SetProperty(ref isSelected, value);
+    }
 
     [XmlElement(ElementName = "user_name")]
     public string UserName

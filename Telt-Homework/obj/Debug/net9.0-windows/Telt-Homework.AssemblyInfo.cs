@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Telt-Homework")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4f6f24a56445c68ec34bbce5ee283679620fbda")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4f74740e7868db027b3035c7134d8e05a54c8a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Telt-Homework")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Telt-Homework")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
